@@ -1,4 +1,4 @@
-package com.example.splashscreen;
+package com.example.nav_activity;
 
 import android.content.Context;
 
@@ -22,6 +22,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
-        assertEquals("com.example.splashscreen", appContext.getPackageName());
+        assertEquals("com.example.nav_activity", appContext.getPackageName());
     }
 }

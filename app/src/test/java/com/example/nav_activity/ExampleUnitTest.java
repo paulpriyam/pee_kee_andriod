@@ -1,4 +1,4 @@
-package com.example.splashscreen;
+package com.example.nav_activity;
 
 import org.junit.Test;
 
