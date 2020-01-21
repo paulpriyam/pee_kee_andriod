@@ -4,68 +4,48 @@ import java.io.Serializable;
 
 public class Merchant implements Serializable {
 
-    int merchant_id;
-    String merchant_name;
-    String price;
-    String quantity;
-    double merchant_rating;
-
-    public Merchant(int merchant_id, String merchant_name, String price, String quantity, double merchant_rating) {
-        this.merchant_id = merchant_id;
-        this.merchant_name = merchant_name;
-        this.price = price;
-        this.quantity = quantity;
-        this.merchant_rating = merchant_rating;
-    }
+    private int merchantId;
+    private String merchantName;
+    private double price;
+    private long quantity;
+    private double merchantRating;
 
     @Override
     public String toString() {
         return "Merchant{" +
-                "merchant_id=" + merchant_id +
-                ", merchant_name='" + merchant_name + '\'' +
-                ", price='" + price + '\'' +
-                ", quantity='" + quantity + '\'' +
-                ", merchant_rating=" + merchant_rating +
+                "merchantId=" + merchantId +
+                ", merchantName='" + merchantName + '\'' +
+                ", price=" + price +
+                ", quantity=" + quantity +
+                ", merchantRating=" + merchantRating +
                 '}';
     }
 
-    public int getMerchant_id() {
-        return merchant_id;
+    public Merchant(int merchantId, String merchantName, double price, long quantity, double merchantRating) {
+        this.merchantId = merchantId;
+        this.merchantName = merchantName;
+        this.price = price;
+        this.quantity = quantity;
+        this.merchantRating = merchantRating;
     }
 
-    public void setMerchant_id(int merchant_id) {
-        this.merchant_id = merchant_id;
+    public int getMerchantId() {
+        return merchantId;
     }
 
-    public String getMerchant_name() {
-        return merchant_name;
+    public String getMerchantName() {
+        return merchantName;
     }
 
-    public void setMerchant_name(String merchant_name) {
-        this.merchant_name = merchant_name;
-    }
-
-    public String getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
-        this.price = price;
-    }
-
-    public String getQuantity() {
+    public long getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(String quantity) {
-        this.quantity = quantity;
-    }
-
-    public double getMerchant_rating() {
-        return merchant_rating;
-    }
-
-    public void setMerchant_rating(double merchant_rating) {
-        this.merchant_rating = merchant_rating;
+    public double getMerchantRating() {
+        return merchantRating;
     }
 }
