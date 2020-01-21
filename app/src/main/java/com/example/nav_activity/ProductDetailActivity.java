@@ -61,13 +61,13 @@ public class ProductDetailActivity extends AppCompatActivity {
 
                 }
 
-                Merchant m1=new Merchant(1,"n","21","1",2.0);
-                Merchant m2=new Merchant(1,"n","21","1",2.0);
+              //  Merchant m1=new Merchant(1,"n","21","1",2.0);
+                //Merchant m2=new Merchant(1,"n","21","1",2.0);
 
 
                 List<Merchant> merchants=response.body();
-                merchants.add(m1);
-                merchants.add(m2);
+             //   merchants.add(m1);
+               // merchants.add(m2);
                 System.out.println(merchants.toString());
                 RecyclerView recyclerView=findViewById(R.id.productdetailrecyclerview);
                 recyclerView.setLayoutManager(new LinearLayoutManager(ProductDetailActivity.this));

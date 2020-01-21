@@ -2,7 +2,8 @@ package com.example.nav_activity;
 
 import java.io.Serializable;
 
-public class Cart implements Serializable {
+public class OrderHistory implements Serializable {
+
     private String productId;
     private String productName;
     private String productDesc;
@@ -16,7 +17,7 @@ public class Cart implements Serializable {
     private double totalPrice;
     private String orderDate;
 
-    public Cart(String productId, String productName, String productDesc, String productCategoryId, double productRating, String productImage, long sellCount, String merchantName, long quantity, double price, double totalPrice, String orderDate) {
+    public OrderHistory(String productId, String productName, String productDesc, String productCategoryId, double productRating, String productImage, long sellCount, String merchantName, long quantity, double price, double totalPrice, String orderDate) {
         this.productId = productId;
         this.productName = productName;
         this.productDesc = productDesc;
@@ -127,4 +128,3 @@ public class Cart implements Serializable {
         this.orderDate = orderDate;
     }
 }
-
