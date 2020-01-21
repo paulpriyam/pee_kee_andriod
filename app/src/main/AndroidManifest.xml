@@ -11,10 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AddToCartActivity">
-
-        </activity>
-        <activity android:name=".CartActivity" />
+        <activity android:name=".GetCartActivity"></activity>
+        <activity android:name=".OrderHistoryActivity" />
+        <activity android:name=".AddToCartActivity" />
         <activity android:name=".ProductDetailActivity" />
         <activity android:name=".RetrofitActivity">
             <intent-filter>

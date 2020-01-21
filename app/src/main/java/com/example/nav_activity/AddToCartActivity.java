@@ -23,24 +23,16 @@ public class AddToCartActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_to_cart);
 
 
-        retrofit=new Retrofit.Builder().baseUrl("https://jsonplaceholder.typicode.com/").addConverterFactory(GsonConverterFactory.create()).build();
+
+        retrofit=new Retrofit.Builder().baseUrl("").addConverterFactory(GsonConverterFactory.create()).build();
         retroInterface=retrofit.create(RetroInterface.class);
 
-        Call<Demo> call=retroInterface.addToCart(1,"a","q","s");
+        Call<Demo> call=retroInterface.addToCart("a","a","q",1);
         call.enqueue(new Callback<Demo>() {
             @Override
             public void onResponse(Call<Demo> call, Response<Demo> response) {
 
-                textViewResult=findViewById(R.id.textViewResult);
-                Demo userResponse=response.body();
-
-                String content="";
-                content +="code :"+response.code()+"\n";
-                content+="Id" + userResponse.getCart_Id() + "\n";
-                content+="UserId" + userResponse.getMerchent_id() + "\n";
-                content+="title" +userResponse.getQuantity() + "\n\n";
-
-                textViewResult.setText(content);
+         
             }
 
             @Override

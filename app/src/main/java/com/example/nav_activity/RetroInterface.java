@@ -17,17 +17,23 @@ public interface RetroInterface {
 
 
     @FormUrlEncoded
-    @POST("posts")
+    @POST("/cartOrder/addToCart")
     Call<Demo> addToCart(
-            @Field("cart_id") int cartId,
-            @Field("user_id")String userId,
-            @Field("merchant_id")String merchant_id,
-            @Field("quantity")String quantity
+            @Field("userId") String userId,
+            @Field("productId")String productId,
+            @Field("merchantId")String merchant_id,
+            @Field("quantity") long quantity
             );
+    @GET("/cartOrder/cart/{userId}")
+    Call<List<Cart>>  getCart(@Path("userId")String userId);
+
 
 
       @GET("posts")
       Call<List<Merchant>> getMerchentList();
+
+      @GET("/cartOrder/orderHistory/{userId}")
+    Call<List<OrderHistory>> orderHistory(@Path("userId")String userId);
 
 
 

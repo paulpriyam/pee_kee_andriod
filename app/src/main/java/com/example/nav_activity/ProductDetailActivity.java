@@ -68,7 +68,7 @@ public class ProductDetailActivity extends AppCompatActivity {
                 List<Merchant> merchants=response.body();
              //   merchants.add(m1);
                // merchants.add(m2);
-                System.out.println(merchants.toString());
+              //  System.out.println(merchants.toString());
                 RecyclerView recyclerView=findViewById(R.id.productdetailrecyclerview);
                 recyclerView.setLayoutManager(new LinearLayoutManager(ProductDetailActivity.this));
                 recyclerView.setAdapter(new ProductDetailAdaptor(merchants));

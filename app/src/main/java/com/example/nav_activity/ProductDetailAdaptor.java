@@ -29,8 +29,8 @@ public class ProductDetailAdaptor extends RecyclerView.Adapter<ProductDetailAdap
 
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
-        holder.merchant_name.setText(String.valueOf(merchants.get(position).getMerchant_name()));
-        holder.merchant_rating.setText(String.valueOf(merchants.get(position).getMerchant_rating()));
+        holder.merchant_name.setText(String.valueOf(merchants.get(position).getMerchantName()));
+        holder.merchant_rating.setText(String.valueOf(merchants.get(position).getMerchantRating()));
         holder.merchant_price.setText(String.valueOf(merchants.get(position).getPrice()));
         holder.quantity.setText(String.valueOf(merchants.get(position).getQuantity()));
 
