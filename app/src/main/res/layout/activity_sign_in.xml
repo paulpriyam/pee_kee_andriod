@@ -89,7 +89,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/login"></TextView>
 
-    <Button
+    <com.facebook.login.widget.LoginButton
         android:id="@+id/facebooklogin"
         android:layout_width="180dp"
         android:layout_height="50dp"
@@ -98,12 +98,12 @@
         android:background="#003d99"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/guide1"
-        app:layout_constraintTop_toBottomOf="@id/or"></Button>
+        app:layout_constraintTop_toBottomOf="@id/or"></com.facebook.login.widget.LoginButton>
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/googlelogin"
         android:layout_width="180dp"
-        android:layout_height="50dp"
+        android:layout_height="35dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.419"
         app:layout_constraintStart_toEndOf="@id/guide1"
@@ -141,6 +141,16 @@
         app:layout_constraintStart_toStartOf="@id/guide1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/dontaccount"></Button>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Skip"
+        android:textSize="20sp"
+        android:id="@+id/skip"
+        app:layout_constraintTop_toBottomOf="@id/signup"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"></Button>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

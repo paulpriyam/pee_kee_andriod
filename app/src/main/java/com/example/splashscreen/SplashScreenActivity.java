@@ -22,7 +22,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         Animation animation= AnimationUtils.loadAnimation(SplashScreenActivity.this,R.anim.myanimation);
         welcome.startAnimation(animation);
         splashimg.startAnimation(animation);
-        final Intent intent=new Intent(SplashScreenActivity.this,MainScreen.class);
+        final Intent intent=new Intent(SplashScreenActivity.this,SignIn.class);
         Thread timer=new Thread()
         {
             public void run()

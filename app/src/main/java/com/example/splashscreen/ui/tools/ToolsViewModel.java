@@ -1,16 +1,16 @@
-package com.example.splashscreen.ui.home;
+package com.example.splashscreen.ui.tools;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class HomeViewModel extends ViewModel {
+public class ToolsViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public HomeViewModel() {
+    public ToolsViewModel() {
         mText = new MutableLiveData<>();
-
+        mText.setValue("This is tools fragment");
     }
 
     public LiveData<String> getText() {
