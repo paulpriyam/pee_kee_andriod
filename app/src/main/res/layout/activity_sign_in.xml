@@ -89,22 +89,25 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/login"></TextView>
 
-    <ImageButton
+    <Button
         android:id="@+id/facebooklogin"
-        android:layout_width="100dp"
+        android:layout_width="180dp"
         android:layout_height="50dp"
+        android:text="FaceBook"
+        android:textColor="#ffffff"
+        android:background="#003d99"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/guide1"
-        app:layout_constraintTop_toBottomOf="@id/or"></ImageButton>
+        app:layout_constraintTop_toBottomOf="@id/or"></Button>
 
-    <ImageButton
+    <com.google.android.gms.common.SignInButton
         android:id="@+id/googlelogin"
-        android:layout_width="100dp"
+        android:layout_width="180dp"
         android:layout_height="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.419"
         app:layout_constraintStart_toEndOf="@id/guide1"
-        app:layout_constraintTop_toBottomOf="@id/or"></ImageButton>
+        app:layout_constraintTop_toBottomOf="@id/or"></com.google.android.gms.common.SignInButton>
 
     <TextView
         android:id="@+id/forgorpassword"
