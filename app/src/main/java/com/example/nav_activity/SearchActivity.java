@@ -3,11 +3,17 @@ package com.example.nav_activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SearchActivity extends AppCompatActivity {
 
@@ -28,13 +34,9 @@ public class SearchActivity extends AppCompatActivity {
 
         list=new ArrayList<String>();
 
-        list.add("monday");
-        list.add("tuesday");
-        list.add("wednesday");
-        list.add("thursday");
-        list.add("friday");
-        list.add("saturday");
-        list.add("sunday");
+
+
+
 
         adapter=new ArrayAdapter<>(this,R.layout.support_simple_spinner_dropdown_item,list);
         listView.setAdapter(adapter);
@@ -46,12 +48,56 @@ public class SearchActivity extends AppCompatActivity {
             }
 
             @Override
-            public boolean onQueryTextChange(String newText) {
+            public boolean onQueryTextChange(final String newText) {
 
-                adapter.getFilter().filter(newText);
-                return false;
+                SearchString searchString=new SearchString(newText);
+
+
+                App.getRetrofit().create(RetroInterface.class).getSearch(searchString).enqueue(new Callback<List<Search>>() {
+
+
+
+
+
+
+                    @Override
+                    public void onResponse(Call<List<Search>> call, Response<List<Search>> response) {
+                       List<Search> searches=response.body();
+                       List<String> list1=new ArrayList<String>();
+
+                        Log.d("inResponse","response");
+
+                        for(Search search:searches)
+                        {
+                            list1.add(search.getProductName());
+                        }
+
+                        list.addAll(list1);
+                        adapter.notifyDataSetChanged();
+
+
+
+
+
+
+
+
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<Search>> call, Throwable t) {
+                        Log.d("failure","failure");
+                    }
+                });
+
+
+
+return false;
+
             }
         });
+
 
     }
 }

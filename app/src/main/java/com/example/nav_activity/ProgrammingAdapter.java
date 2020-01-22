@@ -22,10 +22,10 @@ import java.util.List;
 import retrofit2.Callback;
 
 public class ProgrammingAdapter extends RecyclerView.Adapter<ProgrammingAdapter.ProgrammingViewHolder> {
-    private List<Movies> data;
+    private List<Product> data;
     private ProductCommunication mproductCommunication;
 
-    public ProgrammingAdapter(List<Movies> data, ProductCommunication productCommunication) {
+    public ProgrammingAdapter(List<Product> data, ProductCommunication productCommunication) {
         this.data = data;
         this.mproductCommunication = productCommunication;
     }
@@ -44,8 +44,10 @@ public class ProgrammingAdapter extends RecyclerView.Adapter<ProgrammingAdapter.
 
         // String title=data[position];
         //     holder.name.setText(title);
-        holder.name.setText(String.valueOf(data.get(position).getName()));
-        Glide.with(holder.imageView.getContext()).applyDefaultRequestOptions(new RequestOptions().placeholder(R.drawable.ic_launcher_foreground)).load(data.get(position).getUrl().getMedium()).into(holder.imageView);
+        holder.name.setText(String.valueOf(data.get(position).getProductName()));
+        holder.price.setText(String.valueOf(data.get(position).getPrice()));
+        holder.rating.setText(String.valueOf(data.get(position).getProductRating()));
+       // Glide.with(holder.imageView.getContext()).applyDefaultRequestOptions(new RequestOptions().placeholder(R.drawable.ic_launcher_foreground)).load(data.get(position).getUrl().getMedium()).into(holder.imageView);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,6 +87,6 @@ public class ProgrammingAdapter extends RecyclerView.Adapter<ProgrammingAdapter.
     }
 
     public interface ProductCommunication {
-        public void onItemClick(Movies position);
+        public void onItemClick(Product position);
     }
 }

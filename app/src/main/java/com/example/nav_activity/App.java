@@ -13,7 +13,7 @@ public class App extends Application {
     static Retrofit getRetrofit(){
         if(retrofit==null){
             OkHttpClient client = new OkHttpClient.Builder().build();
-            retrofit=new Retrofit.Builder().baseUrl("https://api.androidhive.info/").addConverterFactory(GsonConverterFactory.create()).client(client).build();
+            retrofit=new Retrofit.Builder().baseUrl("http://172.16.20.161:8090").addConverterFactory(GsonConverterFactory.create()).client(client).build();
         }
         return retrofit;
     }
