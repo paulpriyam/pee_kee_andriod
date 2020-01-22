@@ -58,15 +58,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="product Name"
-            android:textSize="30dp"></TextView>
+            android:textSize="16dp"></TextView>
 
         <TextView
+            android:textSize="16dp"
             android:id="@+id/productdetailslinearprod_des"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="description of the product"></TextView>
 
         <TextView
+            android:textSize="16dp"
             android:id="@+id/productratings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
