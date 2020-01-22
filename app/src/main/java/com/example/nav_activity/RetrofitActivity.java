@@ -24,36 +24,28 @@ public class RetrofitActivity extends AppCompatActivity implements ProgrammingAd
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_retrofit);
 
+       App.getRetrofit().create(RetroInterface.class).getmovie().enqueue(new Callback<List<Movies>>() {
+           @Override
+           public void onResponse(Call<List<Movies>> call, Response<List<Movies>> response) {
 
+               movies=response.body();
 
-
-
-        final Retrofit retrofit=new Retrofit.Builder().baseUrl("https://api.androidhive.info/").addConverterFactory(GsonConverterFactory.create()).build();
-
-        RetroInterface retroInterface=retrofit.create(RetroInterface.class);
-
-        Call<List<Movies>> call=retroInterface.getmovie();
-
-        call.enqueue(new Callback<List<Movies>>() {
-            @Override
-            public void onResponse(Call<List<Movies>> call, Response<List<Movies>> response) {
-
-
-                 movies=response.body();
-
-
-                System.out.println(response.body());
+               System.out.println(response.body());
                RecyclerView recyclerView=findViewById(R.id.recycle_call);
                recyclerView.setLayoutManager(new LinearLayoutManager(RetrofitActivity.this));
                recyclerView.setAdapter(new ProgrammingAdapter(movies,RetrofitActivity.this));
 
-            }
 
-            @Override
-            public void onFailure(Call<List<Movies>> call, Throwable t) {
 
-            }
-        });
+           }
+
+           @Override
+           public void onFailure(Call<List<Movies>> call, Throwable t) {
+
+           }
+       });
+
+
     }
 
 
@@ -65,4 +57,5 @@ public class RetrofitActivity extends AppCompatActivity implements ProgrammingAd
         intent.putExtra("url",position.getUrl().getMedium());
         startActivity(intent);
     }
+
 }

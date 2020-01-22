@@ -13,8 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class AddToCartActivity extends AppCompatActivity {
 
-    Retrofit retrofit;
-    RetroInterface retroInterface;
+
     TextView textViewResult;
 
     @Override
@@ -24,22 +23,19 @@ public class AddToCartActivity extends AppCompatActivity {
 
 
 
-        retrofit=new Retrofit.Builder().baseUrl("").addConverterFactory(GsonConverterFactory.create()).build();
-        retroInterface=retrofit.create(RetroInterface.class);
 
-        Call<Demo> call=retroInterface.addToCart("a","a","q",1);
-        call.enqueue(new Callback<Demo>() {
-            @Override
-            public void onResponse(Call<Demo> call, Response<Demo> response) {
 
-         
-            }
+App.getRetrofit().create(RetroInterface.class).addToCart("a","a","q",1).enqueue(new Callback<Demo>() {
+    @Override
+    public void onResponse(Call<Demo> call, Response<Demo> response) {
 
-            @Override
-            public void onFailure(Call<Demo> call, Throwable t) {
+    }
 
-            }
-        });
+    @Override
+    public void onFailure(Call<Demo> call, Throwable t) {
+
+    }
+});
 
 
 

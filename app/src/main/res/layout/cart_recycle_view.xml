@@ -47,7 +47,7 @@
                 android:id="@+id/cart_layout_spinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:entries="values/strings.xml:9"
+
                 app:layout_constraintStart_toEndOf="@id/cart_layout_image"
                 app:layout_constraintTop_toBottomOf="@id/cart_layout_price"
                 android:layout_marginLeft="24dp"></Spinner>

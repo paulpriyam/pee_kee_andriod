@@ -27,8 +27,6 @@ public class ProductDetailActivity extends AppCompatActivity {
     Button buyNow;
     ImageView productimage;
 
-
-    Retrofit retrofit;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,30 +46,29 @@ public class ProductDetailActivity extends AppCompatActivity {
         Glide.with(this).applyDefaultRequestOptions(new RequestOptions().placeholder(R.drawable.ic_launcher_foreground)).load(getIntent().getStringExtra("url")).into(productimage);
 
 
-        retrofit=new Retrofit.Builder().baseUrl("https://jsonplaceholder.typicode.com/").addConverterFactory(GsonConverterFactory.create()).build();
 
-        RetroInterface retroInterface=retrofit.create(RetroInterface.class);
 
-        Call<List<Merchant>> call=retroInterface.getMerchentList();
-
-        call.enqueue(new Callback<List<Merchant>>() {
+        App.getRetrofit().create(RetroInterface.class).getMerchentList().enqueue(new Callback<List<Merchant>>() {
             @Override
             public void onResponse(Call<List<Merchant>> call, Response<List<Merchant>> response) {
                 if(!response.isSuccessful()){
 
                 }
 
-              //  Merchant m1=new Merchant(1,"n","21","1",2.0);
-                //Merchant m2=new Merchant(1,"n","21","1",2.0);
+              if(response.body()==null)
+                  System.out.println("empty string");
+              else{
+                  List<Merchant> merchants=response.body();
+
+                  //  System.out.println(merchants.toString());
+                  RecyclerView recyclerView=findViewById(R.id.productdetailrecyclerview);
+                  recyclerView.setLayoutManager(new LinearLayoutManager(ProductDetailActivity.this));
+                  recyclerView.setAdapter(new ProductDetailAdaptor(merchants));
 
 
-                List<Merchant> merchants=response.body();
-             //   merchants.add(m1);
-               // merchants.add(m2);
-              //  System.out.println(merchants.toString());
-                RecyclerView recyclerView=findViewById(R.id.productdetailrecyclerview);
-                recyclerView.setLayoutManager(new LinearLayoutManager(ProductDetailActivity.this));
-                recyclerView.setAdapter(new ProductDetailAdaptor(merchants));
+              }
+
+
 
             }
 
