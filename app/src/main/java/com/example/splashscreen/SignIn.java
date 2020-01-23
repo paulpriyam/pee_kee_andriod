@@ -6,9 +6,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
@@ -40,6 +43,11 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SignIn extends AppCompatActivity {
     CallbackManager callbackManager = CallbackManager.Factory.create();
@@ -52,7 +60,22 @@ public class SignIn extends AppCompatActivity {
     private String userId;
     private String TAG = "SignIn";
 
+    private EditText userEmail;
+    private EditText userPassword;
+    private Button login;
+    private Button signup;
 
+
+    private static final Pattern PASSWORD_PATTERN =
+            Pattern.compile("^" +
+                    //"(?=.*[0-9])" +         //at least 1 digit
+                    //"(?=.*[a-z])" +         //at least 1 lower case letter
+                    //"(?=.*[A-Z])" +         //at least 1 upper case letter
+                    "(?=.*[a-zA-Z])" +      //any letter
+                    "(?=.*[@#$%^&+=])" +    //at least 1 special character
+                    "(?=\\S+$)" +           //no white spaces
+                    ".{4,}" +               //at least 4 characters
+                    "$");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +83,11 @@ public class SignIn extends AppCompatActivity {
         FacebookSdk.sdkInitialize(this.getApplicationContext());
         FirebaseApp.initializeApp(this);
         final String EMAIL = "email";
+        userEmail =findViewById(R.id.enteremail);
+        userPassword=findViewById(R.id.passwordenter);
+        login=findViewById(R.id.login);
+        signup=findViewById(R.id.signup);
+
 
         mAuth=FirebaseAuth.getInstance();
 
@@ -151,6 +179,63 @@ public class SignIn extends AppCompatActivity {
             }
         });
 
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!validateEmail()  | !validatePassword()) {
+                    return;
+                }
+
+                String input = "Email: " + userEmail.getText().toString();
+                input += "\n";
+                input += "Password: " + userPassword.getText().toString();
+
+                Toast.makeText(SignIn.this, input, Toast.LENGTH_SHORT).show();
+                LoginPost loginPost=new LoginPost(userEmail.getText().toString(),userPassword.getText().toString(),0,null);
+                App.getRetrofit().create(RetroInterface.class).login(loginPost).enqueue(new Callback<ResponseLogIn>() {
+                    @Override
+                    public void onResponse(Call<ResponseLogIn> call, Response<ResponseLogIn> response) {
+
+                        if(!response.isSuccessful())
+                        {
+                            Log.d("login","error geting response");
+                            return;
+                        }
+
+                        ResponseLogIn responseLogIn=response.body();
+                        String message=responseLogIn.getMessage();
+                        String token=responseLogIn.getData();//store it in shared preferences.
+                        if(message.equals("login successful"))
+                        {
+                            Toast.makeText(SignIn.this,"login Successful",Toast.LENGTH_SHORT).show();
+                            Intent intent=new Intent(SignIn.this,MainActivity.class);
+                            startActivity(intent);
+                        }
+                        else
+                            Toast.makeText(SignIn.this,"login unsuccessful",Toast.LENGTH_SHORT).show();
+
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseLogIn> call, Throwable t) {
+
+                        Log.d("login","failed to login");
+                    }
+                });
+
+
+
+            }
+        });
+
+        signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(SignIn.this,SignUp.class);
+                startActivity(intent);
+            }
+        });
 
         Button skip=findViewById(R.id.skip);
         skip.setOnClickListener(new View.OnClickListener() {
@@ -158,6 +243,7 @@ public class SignIn extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent=new Intent(SignIn.this,MainActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -204,5 +290,47 @@ public class SignIn extends AppCompatActivity {
 
             Log.w("googlesignin", "signInResult:failed code=" + e.getStatusCode());
         }
+    }
+
+    private boolean validateEmail() {
+
+        String emailInput = userEmail.getText().toString().trim();
+
+        if (emailInput.isEmpty()) {
+            userEmail.setError("Field can't be empty");
+            return false;
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()) {
+            userEmail.setError("Please enter a valid email address");
+            return false;
+        } else {
+            userEmail.setError(null);
+            return true;
+        }
+    }
+    private boolean validatePassword() {
+        String passwordInput = userPassword.getText().toString().trim();
+
+        if (passwordInput.isEmpty()) {
+            userPassword.setError("Field can't be empty");
+            return false;
+        } else if (!PASSWORD_PATTERN.matcher(passwordInput).matches()) {
+            userPassword.setError("Password too weak");
+            return false;
+        } else {
+            userPassword.setError(null);
+            return true;
+        }
+    }
+
+    public void login(View v) {
+        if (!validateEmail()  | !validatePassword()) {
+            return;
+        }
+
+        String input = "Email: " + userEmail.getText().toString();
+        input += "\n";
+        input += "Password: " + userPassword.getText().toString();
+
+        Toast.makeText(this, input, Toast.LENGTH_SHORT).show();
     }
 }

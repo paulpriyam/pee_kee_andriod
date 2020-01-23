@@ -87,17 +87,18 @@
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/login"></TextView>
+        app:layout_constraintTop_toBottomOf="@id/login"
+        android:layout_marginTop="8dp"></TextView>
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/facebooklogin"
-        android:layout_width="180dp"
+        android:layout_width="181dp"
         android:layout_height="50dp"
+        android:background="#003d99"
         android:text="FaceBook"
         android:textColor="#ffffff"
-        android:background="#003d99"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/guide1"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/or"></com.facebook.login.widget.LoginButton>
 
     <com.google.android.gms.common.SignInButton
@@ -105,7 +106,6 @@
         android:layout_width="180dp"
         android:layout_height="35dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.419"
         app:layout_constraintStart_toEndOf="@id/guide1"
         app:layout_constraintTop_toBottomOf="@id/or"></com.google.android.gms.common.SignInButton>
 
@@ -138,9 +138,11 @@
         android:layout_height="wrap_content"
         android:text="SIGNUP"
         android:id="@+id/signup"
-        app:layout_constraintStart_toStartOf="@id/guide1"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/dontaccount"></Button>
+        app:layout_constraintTop_toBottomOf="@id/dontaccount"
+        android:layout_marginTop="16dp"
+        ></Button>
 
     <Button
         android:layout_width="wrap_content"
@@ -150,7 +152,8 @@
         android:id="@+id/skip"
         app:layout_constraintTop_toBottomOf="@id/signup"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"></Button>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"></Button>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

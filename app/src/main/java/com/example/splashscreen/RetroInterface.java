@@ -60,6 +60,12 @@ Call<List<Product>> popularProduct();
     @GET("/cartOrder/orderHistory/{userId}")
    Call<List<OrderHistory>> orderHistory(@Path("userId")String userId);
 
+    @POST("/login/user")
+    Call<ResponseLogIn> login(@Body LoginPost loginPost);
+
+    @POST("/login/saveCustomer")
+    Call<ResponseLogIn> customerSignUp(@Body SignupDetails signupDetails);
+
 
 
 

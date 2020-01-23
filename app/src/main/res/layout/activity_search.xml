@@ -7,6 +7,8 @@
     android:orientation="vertical"
     tools:context=".SearchActivity">
 
+
+
     <SearchView
         android:id="@+id/searchView"
         android:layout_width="match_parent"
@@ -14,7 +16,7 @@
         android:queryHint="search here"
         android:iconifiedByDefault="false"
         />
-    <ListView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -10,10 +10,18 @@
     <androidx.constraintlayout.widget.Guideline
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintGuide_percent="0.2"
+        app:layout_constraintGuide_percent="0.25"
         android:id="@+id/signupguide"
         android:orientation="horizontal"></androidx.constraintlayout.widget.Guideline>
 
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:id="@+id/signuppic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/accounticon"
+        app:layout_constraintBottom_toTopOf="@id/signupguide"></ImageView>
 <EditText
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -54,8 +62,8 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/signupaddress2"
-        android:hint="ADDRESS LINE 2"
+        android:id="@+id/signupage"
+        android:hint="AGE"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/signupaddress1"
         android:layout_margin="16dp"
@@ -69,7 +77,7 @@
         android:inputType="textPassword"
         android:hint="ENTER PASSWORD"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/signupaddress2"
+        app:layout_constraintTop_toBottomOf="@id/signupage"
         android:layout_margin="16dp"
         />
 
@@ -94,5 +102,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/signuppasswordconf"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="16dp"></Button>
+        android:layout_margin="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"></Button>
 </androidx.constraintlayout.widget.ConstraintLayout>
