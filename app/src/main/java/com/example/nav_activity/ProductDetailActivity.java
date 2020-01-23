@@ -39,6 +39,8 @@ public class ProductDetailActivity extends AppCompatActivity {
         productimage =findViewById(R.id.productdeatilpreview);
 
 
+        String url=getIntent().getStringExtra("image");
+        Glide.with(this).applyDefaultRequestOptions(new RequestOptions().placeholder(R.drawable.ic_launcher_foreground)).load(url).into(productimage);
 
 
        // productName.setText(getIntent().getStringExtra("name"));

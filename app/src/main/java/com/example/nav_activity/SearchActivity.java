@@ -49,6 +49,13 @@ public class SearchActivity extends AppCompatActivity implements ProgrammingAdap
             @Override
             public boolean onQueryTextSubmit(String query) {
 
+                Intent intent=new Intent(SearchActivity.this,SearchProductDetail.class);
+                intent.putExtra("searchName",query);
+                startActivity(intent);
+
+
+
+
 /*
                 Toast.makeText(SearchActivity.this,query,Toast.LENGTH_SHORT).show();
 

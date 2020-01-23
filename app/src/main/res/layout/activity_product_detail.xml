@@ -76,12 +76,13 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+
         android:id="@+id/productdetailrecyclerview"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_marginTop="69dp"
+        android:layout_width="401dp"
+        android:layout_height="210dp"
+        android:layout_marginTop="32dp"
         app:layout_constraintBottom_toTopOf="@id/productdetailcardview"
-        app:layout_constraintEnd_toEndOf="parent"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/producrdetailslinear"></androidx.recyclerview.widget.RecyclerView>
     <androidx.cardview.widget.CardView
@@ -89,6 +90,7 @@
         android:layout_height="wrap_content"
         app:cardCornerRadius="10dp"
         app:cardElevation="12dp"
+        app:layout_constraintTop_toBottomOf="@+id/productdetailrecyclerview"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -56,6 +56,8 @@ public class RetrofitActivity extends AppCompatActivity implements ProgrammingAd
         intent.putExtra("name",position.getProductName());
         intent.putExtra("rating",position.getProductRating());
         intent.putExtra("productId",position.getProductId());
+        intent.putExtra("image",position.getProductImage());
+
        // intent.putExtra("url",position.getUrl().getMedium());
         startActivity(intent);
     }

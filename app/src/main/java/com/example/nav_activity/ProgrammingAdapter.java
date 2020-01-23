@@ -47,7 +47,7 @@ public class ProgrammingAdapter extends RecyclerView.Adapter<ProgrammingAdapter.
         holder.name.setText(String.valueOf(data.get(position).getProductName()));
         holder.price.setText(String.valueOf(data.get(position).getPrice()));
         holder.rating.setText(String.valueOf(data.get(position).getProductRating()));
-       // Glide.with(holder.imageView.getContext()).applyDefaultRequestOptions(new RequestOptions().placeholder(R.drawable.ic_launcher_foreground)).load(data.get(position).getUrl().getMedium()).into(holder.imageView);
+       Glide.with(holder.imageView.getContext()).applyDefaultRequestOptions(new RequestOptions().placeholder(R.drawable.ic_launcher_foreground)).load(data.get(position).getProductImage()).into(holder.imageView);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
