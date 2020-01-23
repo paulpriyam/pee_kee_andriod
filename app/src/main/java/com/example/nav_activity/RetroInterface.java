@@ -17,7 +17,6 @@ public interface RetroInterface {
     Call<List<Product>> popularProduct();
 
 
-    @FormUrlEncoded
     @POST("/cartOrder/addToCart")
     Call<Demo> addToCart(
             @Field("userId") String userId,
@@ -29,11 +28,20 @@ public interface RetroInterface {
     Call<List<Cart>>  getCart(@Path("userId")String userId);
 
 
+
+  @POST("/login/user")
+   Call<ResponseLogIn> login(@Body LoginPost loginPost);
+
+
+  @POST("/login/saveCustomer")
+  Call<ResponseLogIn> customerSignUp(@Body SignupDetails signupDetails);
+
+
 @POST("/solrsearch/search")
 Call<List<Search>> getSearch(@Body SearchString searchString);
 
-      @GET("posts")
-      Call<List<Merchant>> getMerchentList();
+      @GET("/merchant/listOfMerchant/{productId}")
+      Call<ResponseMerchant> getMerchentList(@Path("productId")String productId);
 
       @GET("/cartOrder/orderHistory/{userId}")
     Call<List<OrderHistory>> orderHistory(@Path("userId")String userId);

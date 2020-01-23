@@ -72,11 +72,11 @@ public class ProgrammingAdapter extends RecyclerView.Adapter<ProgrammingAdapter.
         TextView name;
         TextView price;
         TextView rating;
-        ConstraintLayout constraintLayout;
+
 
         public ProgrammingViewHolder(@NonNull View itemView) {
             super(itemView);
-            constraintLayout = (ConstraintLayout) itemView.findViewById(R.id.constraintLayout);
+
             imageView = (ImageView) itemView.findViewById(R.id.imageView);
             name = (TextView) itemView.findViewById(R.id.recycle_name);
             price = (TextView) itemView.findViewById(R.id.recycle_price);

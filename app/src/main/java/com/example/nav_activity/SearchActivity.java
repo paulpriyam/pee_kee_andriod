@@ -173,5 +173,12 @@ return false;
     @Override
     public void onItemClick(Product position) {
 
+        Intent intent=new Intent(SearchActivity.this,ProductDetailActivity.class);
+        intent.putExtra("name",position.getProductName());
+        intent.putExtra("rating",position.getProductRating());
+        intent.putExtra("productId",position.getProductId());
+        // intent.putExtra("url",position.getUrl().getMedium());
+        startActivity(intent);
+
     }
 }

@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -38,45 +39,36 @@ public class ProductDetailActivity extends AppCompatActivity {
         productimage =findViewById(R.id.productdeatilpreview);
 
 
-        //String name=getIntent().getStringExtra("product");
-        //productName.setText(name);
 
-        productName.setText(getIntent().getStringExtra("name"));
+
+       // productName.setText(getIntent().getStringExtra("name"));
        // Glide.with(this).load(getIntent().getStringExtra("url")).into(productimage);
-        Glide.with(this).applyDefaultRequestOptions(new RequestOptions().placeholder(R.drawable.ic_launcher_foreground)).load(getIntent().getStringExtra("url")).into(productimage);
+    //    Glide.with(this).applyDefaultRequestOptions(new RequestOptions().placeholder(R.drawable.ic_launcher_foreground)).load(getIntent().getStringExtra("url")).into(productimage);
 
 
-
-
-        App.getRetrofit().create(RetroInterface.class).getMerchentList().enqueue(new Callback<List<Merchant>>() {
+        App.getRetrofit().create(RetroInterface.class).getMerchentList("1").enqueue(new Callback<ResponseMerchant>() {
             @Override
-            public void onResponse(Call<List<Merchant>> call, Response<List<Merchant>> response) {
-                if(!response.isSuccessful()){
+            public void onResponse(Call<ResponseMerchant> call, Response<ResponseMerchant> response) {
+                ResponseMerchant responseMerchant=response.body();
+                List<Merchant> merchants=responseMerchant.getData();
 
-                }
-
-              if(response.body()==null)
-                  System.out.println("empty string");
-              else{
-                  List<Merchant> merchants=response.body();
-
-                  //  System.out.println(merchants.toString());
-                  RecyclerView recyclerView=findViewById(R.id.productdetailrecyclerview);
-                  recyclerView.setLayoutManager(new LinearLayoutManager(ProductDetailActivity.this));
-                  recyclerView.setAdapter(new ProductDetailAdaptor(merchants));
-
-
-              }
-
-
+                RecyclerView recyclerView=findViewById(R.id.productdetailrecyclerview);
+                recyclerView.setLayoutManager(new LinearLayoutManager(ProductDetailActivity.this));
+                recyclerView.setAdapter(new ProductDetailAdaptor(merchants));
 
             }
 
             @Override
-            public void onFailure(Call<List<Merchant>> call, Throwable t) {
+            public void onFailure(Call<ResponseMerchant> call, Throwable t) {
 
+                Log.d("Fail","sorry , server did not connect");
             }
         });
 
-    }
+
+        }
+
+
+
+
 }
