@@ -22,8 +22,7 @@ public class ProductDetailAdaptor extends RecyclerView.Adapter<ProductDetailAdap
     @Override
     public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.popular_layout
-                , parent, false);
+        View view = inflater.inflate(R.layout.merchant_layout, parent, false);
 
         return new ProductViewHolder(view);
     }
@@ -39,7 +38,7 @@ public class ProductDetailAdaptor extends RecyclerView.Adapter<ProductDetailAdap
 
     @Override
     public int getItemCount() {
-        return 10 ;
+        return merchants.size();
     }
 
     public class ProductViewHolder extends RecyclerView.ViewHolder{

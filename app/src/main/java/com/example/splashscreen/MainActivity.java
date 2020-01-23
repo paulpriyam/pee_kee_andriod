@@ -2,6 +2,7 @@ package com.example.splashscreen;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -17,6 +18,8 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.navigation.NavigationView;
@@ -24,7 +27,12 @@ import com.google.android.material.navigation.NavigationView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener ,ProgrammingAdapter.ProductCommunication{
+
 
     private AppBarConfiguration mAppBarConfiguration;
 
@@ -81,22 +89,33 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //            navigationView.setCheckedItem(R.id.nav_account);
 //        }
 
-        productdata();
+//
+
+        App.getRetrofit().create(RetroInterface.class).popularProduct().enqueue(new Callback<List<Product>>() {
+            @Override
+            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                if(!response.isSuccessful())
+                {
+                    Log.d("product","response is not comming");
+                    return;
+                }
+                productList=response.body();
+                System.out.println(response.body());
+                Log.d("product","response is comming");
+                RecyclerView recyclerView=findViewById(R.id.recycle_call);
+                recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+                recyclerView.setAdapter(new ProgrammingAdapter(productList,MainActivity.this));
+
+            }
+
+            @Override
+            public void onFailure(Call<List<Product>> call, Throwable t) {
+
+                Log.d("fail","failure"+t.getMessage());
+            }
+        });
     }
 
-    private void productdata()
-    {
-        Product product=new Product("1","aaa","hjkfd",4.00,"https://images.pexels.com/photos/1304540/pexels-photo-1304540.jpeg",12,"1","2",12,480.00);
-        productList.add(product);
-        product=new Product("2","aaa","hjkfd",4.00,"https://images.pexels.com/photos/1304540/pexels-photo-1304540.jpeg",12,"1","2",12,480.00);
-        productList.add(product);
-         product=new Product("3","aaa","hjkfd",4.00,"https://images.pexels.com/photos/1672304/pexels-photo-1672304.jpeg",12,"1","2",12,480.00);
-        productList.add(product);
-         product=new Product("4","aaa","hjkfd",4.00,"https://images.pexels.com/photos/1672304/pexels-photo-1672304.jpeg",12,"1","2",12,480.00);
-        productList.add(product);
-        product=new Product("5","aaa","hjkfd",4.00,"https://images.pexels.com/photos/1672304/pexels-photo-1672304.jpeg",12,"1","2",12,480.00);
-        productList.add(product);
-    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -164,5 +183,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         drawer.closeDrawer(GravityCompat.START);
         return false;
+    }
+
+
+    // on clicking the product ->go to product detail page
+    @Override
+    public void onItemClick(Product position) {
+        System.out.println(position.getProductName());
+        Intent intent=new Intent(MainActivity.this,ProductDetailActivity.class);
+        intent.putExtra("name",position.getProductName());
+        intent.putExtra("rating",position.getProductRating());
+        intent.putExtra("productId",position.getProductId());
+        startActivity(intent);
     }
 }

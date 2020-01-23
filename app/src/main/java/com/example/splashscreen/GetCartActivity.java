@@ -11,29 +11,22 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class GetCartActivity extends AppCompatActivity {
 
-    Retrofit retrofit;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_get_cart);
 
-        retrofit = new Retrofit.Builder().baseUrl("").addConverterFactory(GsonConverterFactory.create()).build();
 
-        RetroInterface retroInterface = retrofit.create(RetroInterface.class);
-
-        Call<List<Cart>> call = retroInterface.getCart("1");
-        call.enqueue(new Callback<List<Cart>>() {
+        App.getRetrofit().create(RetroInterface.class).getCart("1").enqueue(new Callback<List<Cart>>() {
             @Override
             public void onResponse(Call<List<Cart>> call, Response<List<Cart>> response) {
-
                 List<Cart> list=response.body();
-                RecyclerView recyclerView=findViewById(R.id.cart_recycler_view);
+                RecyclerView recyclerView=findViewById(R.id.get_cart_recycle);
                 recyclerView.setLayoutManager(new LinearLayoutManager(GetCartActivity.this));
                 recyclerView.setAdapter(new GetCartAdaptor(list));
 
@@ -44,6 +37,8 @@ public class GetCartActivity extends AppCompatActivity {
 
             }
         });
+
+
 
     }
 }

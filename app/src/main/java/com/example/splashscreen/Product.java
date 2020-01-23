@@ -12,7 +12,9 @@ public class Product implements Serializable {
     private String productCategoryId;
     private String merchantId;
     private long quantity;
-    private double productPrice;
+    private double price;
+
+
 
     public Product(String productId, String productName, String productDesc, Double productRating, String productImage, long sellCount, String productCategoryId, String merchantId, long quantity, double price) {
         this.productId = productId;
@@ -24,7 +26,7 @@ public class Product implements Serializable {
         this.productCategoryId = productCategoryId;
         this.merchantId = merchantId;
         this.quantity = quantity;
-        this.productPrice = price;
+        this.price = price;
     }
 
     public String getProductId() {
@@ -99,11 +101,11 @@ public class Product implements Serializable {
         this.quantity = quantity;
     }
 
-    public double getProductPrice() {
-        return  productPrice ;
+    public double getPrice() {
+        return price;
     }
 
-    public void setProductPrice(double price) {
-        this.productPrice = price;
+    public void setPrice(double price) {
+        this.price = price;
     }
 }

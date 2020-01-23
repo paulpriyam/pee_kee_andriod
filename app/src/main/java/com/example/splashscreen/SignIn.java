@@ -197,8 +197,8 @@ public class SignIn extends AppCompatActivity {
             String idToken = account.getIdToken();
             System.out.println("token:"+idToken);
             Log.e("token",idToken);
-            Intent intent=new Intent(SignIn.this,AfterSignIn.class);
-            intent.putExtra("token",idToken);
+            Intent intent=new Intent(SignIn.this,MainActivity.class);
+//            intent.putExtra("token",idToken);
             startActivity(intent);
         } catch (ApiException e) {
 
