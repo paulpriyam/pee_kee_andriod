@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
@@ -66,16 +67,16 @@ public class SignIn extends AppCompatActivity {
     private Button signup;
 
 
-    private static final Pattern PASSWORD_PATTERN =
-            Pattern.compile("^" +
-                    //"(?=.*[0-9])" +         //at least 1 digit
-                    //"(?=.*[a-z])" +         //at least 1 lower case letter
-                    //"(?=.*[A-Z])" +         //at least 1 upper case letter
-                    "(?=.*[a-zA-Z])" +      //any letter
-                    "(?=.*[@#$%^&+=])" +    //at least 1 special character
-                    "(?=\\S+$)" +           //no white spaces
-                    ".{4,}" +               //at least 4 characters
-                    "$");
+//    private static final Pattern PASSWORD_PATTERN =
+//            Pattern.compile("^" +
+//                    "(?=.*[0-9])" +         //at least 1 digit
+//                    "(?=.*[a-z])" +         //at least 1 lower case letter
+//                    "(?=.*[A-Z])" +         //at least 1 upper case letter
+//                    "(?=.*[a-zA-Z])" +      //any letter
+//                    "(?=.*[@#$%^&+=])" +    //at least 1 special character
+//                    "(?=\\S+$)" +           //no white spaces
+//                    ".{4,}" +               //at least 4 characters
+//                    "$");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -123,7 +124,29 @@ public class SignIn extends AppCompatActivity {
                     @Override
                     public void onSuccess(LoginResult loginResult) {
 
-                        Log.e("token:", loginResult.getAccessToken().toString());
+//                        Log.e("token:", loginResult.getAccessToken().toString());
+
+                        String idTokenFacebook=loginResult.getAccessToken().toString();
+                        AccessToken accessToken=new AccessToken();
+                        accessToken.setAccesstoken(idTokenFacebook);
+                        accessToken.setType("android");
+                        accessToken.setRole(0);
+                        App.getRetrofit().create(RetroInterface.class).sendFacebookToken(accessToken).enqueue(new Callback<ResponseLogIn>() {
+                            @Override
+                            public void onResponse(Call<ResponseLogIn> call, Response<ResponseLogIn> response) {
+                                ResponseLogIn responseLogIn=response.body();
+                                if(responseLogIn.getStatus()==1000)
+                                {
+                                    Intent intent=new Intent(SignIn.this,MainActivity.class);
+                                    startActivity(intent);
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<ResponseLogIn> call, Throwable t) {
+
+                            }
+                        });
 
                         GraphRequest request = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
 
@@ -146,8 +169,6 @@ public class SignIn extends AppCompatActivity {
                                     if (object.has("gender"))
                                         gender = object.getString("gender");
                                     Log.e("values:", "email: " + email);
-                                    Intent intent = new Intent(SignIn.this, AfterSignIn.class);
-                                    startActivity(intent);
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 } catch (MalformedURLException e) {
@@ -182,15 +203,15 @@ public class SignIn extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!validateEmail()  | !validatePassword()) {
-                    return;
-                }
-
-                String input = "Email: " + userEmail.getText().toString();
-                input += "\n";
-                input += "Password: " + userPassword.getText().toString();
-
-                Toast.makeText(SignIn.this, input, Toast.LENGTH_SHORT).show();
+//                if (!validateEmail()  | !validatePassword()) {
+//                    return;
+//                }
+//
+//                String input = "Email: " + userEmail.getText().toString();
+//                input += "\n";
+//                input += "Password: " + userPassword.getText().toString();
+//
+//                Toast.makeText(SignIn.this, input, Toast.LENGTH_SHORT).show();
                 LoginPost loginPost=new LoginPost(userEmail.getText().toString(),userPassword.getText().toString(),0,null);
                 App.getRetrofit().create(RetroInterface.class).login(loginPost).enqueue(new Callback<ResponseLogIn>() {
                     @Override
@@ -205,7 +226,7 @@ public class SignIn extends AppCompatActivity {
                         ResponseLogIn responseLogIn=response.body();
                         String message=responseLogIn.getMessage();
                         String token=responseLogIn.getData();//store it in shared preferences.
-                        if(message.equals("login successful"))
+                        if(message.equals("Login Successful"))
                         {
                             Toast.makeText(SignIn.this,"login Successful",Toast.LENGTH_SHORT).show();
                             Intent intent=new Intent(SignIn.this,MainActivity.class);
@@ -282,10 +303,28 @@ public class SignIn extends AppCompatActivity {
             GoogleSignInAccount account = taskCompleted.getResult(ApiException.class);
             String idToken = account.getIdToken();
             System.out.println("token:"+idToken);
-            Log.e("token",idToken);
-            Intent intent=new Intent(SignIn.this,MainActivity.class);
+            AccessToken accessToken=new AccessToken();
+            accessToken.setAccesstoken(idToken);
+            accessToken.setRole(0);
+            accessToken.setType("Android");
+            App.getRetrofit().create(RetroInterface.class).sendGoogleToken(accessToken).enqueue(new Callback<ResponseLogIn>() {
+                @Override
+                public void onResponse(Call<ResponseLogIn> call, Response<ResponseLogIn> response) {
+                    ResponseLogIn responseLogIn=response.body();
+                    if(responseLogIn.getStatus()==1000) {
+                        Intent intent = new Intent(SignIn.this, MainActivity.class);
 //            intent.putExtra("token",idToken);
-            startActivity(intent);
+                        startActivity(intent);
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResponseLogIn> call, Throwable t) {
+
+                }
+            });
+            Log.e("token",idToken);
+
         } catch (ApiException e) {
 
             Log.w("googlesignin", "signInResult:failed code=" + e.getStatusCode());
@@ -307,23 +346,10 @@ public class SignIn extends AppCompatActivity {
             return true;
         }
     }
-    private boolean validatePassword() {
-        String passwordInput = userPassword.getText().toString().trim();
 
-        if (passwordInput.isEmpty()) {
-            userPassword.setError("Field can't be empty");
-            return false;
-        } else if (!PASSWORD_PATTERN.matcher(passwordInput).matches()) {
-            userPassword.setError("Password too weak");
-            return false;
-        } else {
-            userPassword.setError(null);
-            return true;
-        }
-    }
 
     public void login(View v) {
-        if (!validateEmail()  | !validatePassword()) {
+        if (!validateEmail()  ) {
             return;
         }
 

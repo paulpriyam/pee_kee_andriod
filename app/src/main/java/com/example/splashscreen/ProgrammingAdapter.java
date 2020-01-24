@@ -7,8 +7,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
 
@@ -38,7 +40,7 @@ public class ProgrammingAdapter extends RecyclerView.Adapter<ProgrammingAdapter.
         holder.name.setText(String.valueOf(data.get(position).getProductName()));
         holder.price.setText(String.valueOf(data.get(position).getPrice()));
         holder.rating.setText(String.valueOf(data.get(position).getProductRating()));
-       // Glide.with(holder.imageView.getContext()).applyDefaultRequestOptions(new RequestOptions().placeholder(R.drawable.ic_launcher_foreground)).load(data.get(position).getUrl().getMedium()).into(holder.imageView);
+       Glide.with(holder.imageView.getContext()).applyDefaultRequestOptions(new RequestOptions().placeholder(R.drawable.ic_launcher_foreground)).load(data.get(position).getProductImage()).into(holder.imageView);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,11 +65,11 @@ public class ProgrammingAdapter extends RecyclerView.Adapter<ProgrammingAdapter.
         TextView name;
         TextView price;
         TextView rating;
-        ConstraintLayout constraintLayout;
+
 
         public ProgrammingViewHolder(@NonNull View itemView) {
             super(itemView);
-            constraintLayout = (ConstraintLayout) itemView.findViewById(R.id.constraintLayout);
+
             imageView = (ImageView) itemView.findViewById(R.id.imageView);
             name = (TextView) itemView.findViewById(R.id.recycle_name);
             price = (TextView) itemView.findViewById(R.id.recycle_price);

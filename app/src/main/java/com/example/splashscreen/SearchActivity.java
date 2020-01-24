@@ -1,5 +1,6 @@
 package com.example.splashscreen;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
@@ -44,6 +45,13 @@ public class SearchActivity extends AppCompatActivity implements ProgrammingAdap
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+
+                Intent intent=new Intent(SearchActivity.this,SearchProductDetail.class);
+                intent.putExtra("searchName",query);
+                startActivity(intent);
+
+
+
 
 /*
                 Toast.makeText(SearchActivity.this,query,Toast.LENGTH_SHORT).show();
@@ -105,7 +113,7 @@ public class SearchActivity extends AppCompatActivity implements ProgrammingAdap
 
 
 
-                return false;
+                return true;
             }
 
             @Override
@@ -168,6 +176,13 @@ return false;
 
     @Override
     public void onItemClick(Product position) {
+
+        Intent intent=new Intent(SearchActivity.this,ProductDetailActivity.class);
+        intent.putExtra("name",position.getProductName());
+        intent.putExtra("rating",position.getProductRating());
+        intent.putExtra("productId",position.getProductId());
+        // intent.putExtra("url",position.getUrl().getMedium());
+        startActivity(intent);
 
     }
 }

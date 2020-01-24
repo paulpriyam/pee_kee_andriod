@@ -25,7 +25,7 @@
                 android:layout_height="100dp"
                 android:src="@drawable/accounticon"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"></ImageView>
+                app:layout_constraintTop_toTopOf="parent"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -34,7 +34,7 @@
                 app:layout_constraintStart_toEndOf="@id/cart_layout_image"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginLeft="24dp"
-                android:id="@+id/cart_layout_name"></TextView>
+                android:id="@+id/cart_layout_name"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -43,31 +43,46 @@
                 app:layout_constraintStart_toEndOf="@id/cart_layout_image"
                 app:layout_constraintTop_toBottomOf="@id/cart_layout_name"
                 android:layout_marginLeft="24dp"
-                ></TextView>
+                />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="quantity"
                 android:id="@+id/cart_layout_quantity"
-                app:layout_constraintStart_toEndOf="@id/cart_layout_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="32dp"
+                android:textSize="20dp"
+                app:layout_constraintTop_toBottomOf="@id/cart_layout_merchantName"
+                android:layout_marginRight="80dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="merchantName"
+                android:textSize="16dp"
+                android:layout_marginLeft="24dp"
                 app:layout_constraintTop_toBottomOf="@id/cart_layout_price"
-                android:layout_marginLeft="24dp"></TextView>
+                android:id="@+id/cart_layout_merchantName"
+                app:layout_constraintStart_toEndOf="@id/cart_layout_image"/>
 
             <Button
-                android:id="@+id/cart_layout_delete"
+                android:id="@+id/cart_layout_add"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="add"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cart_layout_quantity"
-                ></Button>
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toStartOf="@id/cart_layout_quantity"
+                app:layout_constraintTop_toBottomOf="@+id/cart_layout_merchantName"
+               />
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="delete"
-                app:layout_constraintTop_toBottomOf="@id/cart_layout_delete"
-                app:layout_constraintEnd_toEndOf="parent"></Button>
+                android:id="@+id/cart_layout_delete"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/cart_layout_merchantName"
+                app:layout_constraintStart_toEndOf="@id/cart_layout_quantity"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

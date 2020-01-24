@@ -12,15 +12,19 @@ public class SignupDetails implements Serializable {
     private String customerImage;
     private String password;
 
-    public SignupDetails(String customerName, String customerEmail, String customerMobileNo, int customerAge, String customerAddress, String customerImage, String password) {
-        this.customerName = customerName;
-        this.customerEmail = customerEmail;
-        this.customerMobileNo = customerMobileNo;
-        this.customerAge = customerAge;
-        this.customerAddress = customerAddress;
-        this.customerImage = customerImage;
-        this.password = password;
-    }
+//     SignupDetails(String customerName) {
+//        this.customerName = customerName;
+//    }public
+
+//    public SignupDetails(String customerName, String customerEmail, String customerMobileNo, int customerAge, String customerAddress, String customerImage, String password) {
+//        this.customerName = customerName;
+//        this.customerEmail = customerEmail;
+//        this.customerMobileNo = customerMobileNo;
+//        this.customerAge = customerAge;
+//        this.customerAddress = customerAddress;
+//        this.customerImage = customerImage;
+//        this.password = password;
+//    }
 
     public String getCustomerName() {
         return customerName;

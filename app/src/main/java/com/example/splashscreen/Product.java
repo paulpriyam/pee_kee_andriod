@@ -15,6 +15,8 @@ public class Product implements Serializable {
     private double price;
 
 
+    public Product() {
+    }
 
     public Product(String productId, String productName, String productDesc, Double productRating, String productImage, long sellCount, String productCategoryId, String merchantId, long quantity, double price) {
         this.productId = productId;
@@ -27,6 +29,7 @@ public class Product implements Serializable {
         this.merchantId = merchantId;
         this.quantity = quantity;
         this.price = price;
+
     }
 
     public String getProductId() {

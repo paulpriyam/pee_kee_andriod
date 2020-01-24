@@ -4,104 +4,122 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignUp"
-    android:background="@color/background">
+    android:background="@color/background"
+    tools:context=".SignUp">
 
     <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/signupguide"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintGuide_percent="0.25"
-        android:id="@+id/signupguide"
-        android:orientation="horizontal"></androidx.constraintlayout.widget.Guideline>
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.25"/>
 
     <ImageView
+        android:id="@+id/signuppic"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:id="@+id/signuppic"
+        android:src="@drawable/accounticon"
+        app:layout_constraintBottom_toTopOf="@id/signupguide"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:src="@drawable/accounticon"
-        app:layout_constraintBottom_toTopOf="@id/signupguide"></ImageView>
-<EditText
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/signupname"
-    android:hint="NAME"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/signupguide"
-    android:layout_margin="16dp"
-    ></EditText>
+        app:layout_constraintTop_toBottomOf="@id/signupguide"
+        app:layout_constraintBottom_toBottomOf="parent">
     <EditText
+        android:id="@+id/signupname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/signuemail"
-        android:hint="EMAIL ID"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/signupname"
         android:layout_margin="16dp"
-        ></EditText>
+        android:hint="NAME"
+        android:inputType="text"
+        android:imeOptions="actionNext"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/signupguide"
+        />
 
     <EditText
+        android:id="@+id/signuemail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:hint="EMAIL ID"
+        android:inputType="textEmailAddress"
+        android:imeOptions="actionNext"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/signupname" />
+
+    <EditText
         android:id="@+id/signupmobile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
         android:hint="MOBILE  NNUMBER"
+        android:inputType="phone"
+        android:imeOptions="actionNext"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/signuemail"
-        android:layout_margin="16dp"
-        ></EditText>
+        app:layout_constraintTop_toBottomOf="@id/signuemail" />
+
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/signupaddress1"
-        android:hint="ADDRESS LINE 1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/signupmobile"
-        android:layout_margin="16dp"
-        ></EditText>
-    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/signupage"
-        android:hint="AGE"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/signupaddress1"
         android:layout_margin="16dp"
-        ></EditText>
+        android:inputType="text"
+        android:hint="ADDRESS LINE 1"
+        android:imeOptions="actionNext"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/signupmobile" />
+
+    <EditText
+        android:id="@+id/signupage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:hint="AGE"
+        android:imeOptions="actionNext"
+        android:inputType="number"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/signupaddress1" />
 
     <EditText
         android:id="@+id/signuppassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPassword"
-        android:hint="ENTER PASSWORD"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/signupage"
         android:layout_margin="16dp"
-        />
+        android:ems="10"
+        android:hint="ENTER PASSWORD"
+        android:imeOptions="actionNext"
+        android:inputType="textPassword"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/signupage" />
 
     <EditText
         android:id="@+id/signuppasswordconf"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPassword"
-        android:hint="CONFORM PASSWORD"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/signuppassword"
         android:layout_margin="16dp"
-        />
+        android:ems="10"
+        android:hint="CONFORM PASSWORD"
+        android:imeOptions="actionDone"
+        android:inputType="textPassword"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/signuppassword" />
 
 
     <Button
+        android:id="@+id/signupsignup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SIGNUP"
-        android:id="@+id/signupsignup"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/signuppasswordconf"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"></Button>
+        android:text="SIGNUP"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/signuppasswordconf"></Button>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

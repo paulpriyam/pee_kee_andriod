@@ -10,7 +10,7 @@ public class App extends Application {
 
 
     static Retrofit retrofit;
-    public static Retrofit getRetrofit(){
+    static Retrofit getRetrofit(){
         if(retrofit==null){
             OkHttpClient client = new OkHttpClient.Builder().build();
             retrofit=new Retrofit.Builder().baseUrl("http://10.177.69.105:8090").addConverterFactory(GsonConverterFactory.create()).client(client).build();

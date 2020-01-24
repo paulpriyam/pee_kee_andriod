@@ -3,6 +3,9 @@ package com.example.splashscreen;
 import java.io.Serializable;
 
 public class Cart implements Serializable {
+
+    private int cartId;
+    private int orderId;
     private String productId;
     private String productName;
     private String productDesc;
@@ -10,13 +13,17 @@ public class Cart implements Serializable {
     private double productRating;
     private String productImage;
     private long sellCount;
+    private String merchantId;
     private String merchantName;
     private long quantity;
     private double price;
     private double totalPrice;
     private String orderDate;
 
-    public Cart(String productId, String productName, String productDesc, String productCategoryId, double productRating, String productImage, long sellCount, String merchantName, long quantity, double price, double totalPrice, String orderDate) {
+    public Cart(int cartId, int orderId, String productId, String productName, String productDesc, String productCategoryId, double productRating, String productImage, long sellCount, String merchantId, String merchantName, long quantity, double price, double totalPrice, String orderDate) {
+
+        this.cartId = cartId;
+        this.orderId = orderId;
         this.productId = productId;
         this.productName = productName;
         this.productDesc = productDesc;
@@ -24,11 +31,28 @@ public class Cart implements Serializable {
         this.productRating = productRating;
         this.productImage = productImage;
         this.sellCount = sellCount;
+        this.merchantId = merchantId;
         this.merchantName = merchantName;
         this.quantity = quantity;
         this.price = price;
         this.totalPrice = totalPrice;
         this.orderDate = orderDate;
+    }
+
+    public int getCartId() {
+        return cartId;
+    }
+
+    public void setCartId(int cartId) {
+        this.cartId = cartId;
+    }
+
+    public int getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
     }
 
     public String getProductId() {
@@ -85,6 +109,14 @@ public class Cart implements Serializable {
 
     public void setSellCount(long sellCount) {
         this.sellCount = sellCount;
+    }
+
+    public String getMerchantId() {
+        return merchantId;
+    }
+
+    public void setMerchantId(String merchantId) {
+        this.merchantId = merchantId;
     }
 
     public String getMerchantName() {

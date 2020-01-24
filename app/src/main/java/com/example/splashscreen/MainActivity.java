@@ -189,11 +189,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     // on clicking the product ->go to product detail page
     @Override
     public void onItemClick(Product position) {
+//        System.out.println(position.getProductName());
+//        Intent intent=new Intent(MainActivity.this,ProductDetailActivity.class);
+//        intent.putExtra("name",position.getProductName());
+//        intent.putExtra("rating",position.getProductRating());
+//        intent.putExtra("productId",position.getProductId());
+//        startActivity(intent);
         System.out.println(position.getProductName());
         Intent intent=new Intent(MainActivity.this,ProductDetailActivity.class);
         intent.putExtra("name",position.getProductName());
         intent.putExtra("rating",position.getProductRating());
         intent.putExtra("productId",position.getProductId());
+        intent.putExtra("image",position.getProductImage());
+
+        // intent.putExtra("url",position.getUrl().getMedium());
         startActivity(intent);
     }
 }
