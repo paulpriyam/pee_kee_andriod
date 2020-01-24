@@ -70,7 +70,8 @@
                 android:id="@+id/cart_layout_add"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="add"
+                android:text="+"
+                android:textSize="20sp"
                 android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toStartOf="@id/cart_layout_quantity"
                 app:layout_constraintTop_toBottomOf="@+id/cart_layout_merchantName"
@@ -78,11 +79,21 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="delete"
+                android:text="-"
+                android:textSize="20sp"
                 android:id="@+id/cart_layout_delete"
                 android:layout_marginTop="16dp"
                 app:layout_constraintTop_toBottomOf="@id/cart_layout_merchantName"
                 app:layout_constraintStart_toEndOf="@id/cart_layout_quantity"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/cart_layout_remove"
+                android:text="remove"
+                app:layout_constraintTop_toBottomOf="@id/cart_layout_quantity"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginRight="60dp"
+                android:layout_marginTop="8dp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

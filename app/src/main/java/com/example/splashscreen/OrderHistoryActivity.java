@@ -1,5 +1,6 @@
 package com.example.splashscreen;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,7 +15,8 @@ import retrofit2.Response;
 
 public class OrderHistoryActivity extends AppCompatActivity {
 
-
+    SharedPreferences sharedPreferences=getSharedPreferences("login",MODE_PRIVATE);
+    String token=sharedPreferences.getString("token","");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,7 +24,7 @@ public class OrderHistoryActivity extends AppCompatActivity {
 
 
 
-        App.getRetrofit().create(RetroInterface.class).orderHistory("1").enqueue(new Callback<List<OrderHistory>>() {
+        App.getRetrofit().create(RetroInterface.class).orderHistory(token).enqueue(new Callback<List<OrderHistory>>() {
             @Override
             public void onResponse(Call<List<OrderHistory>> call, Response<List<OrderHistory>> response) {
                 List<OrderHistory> list=response.body();

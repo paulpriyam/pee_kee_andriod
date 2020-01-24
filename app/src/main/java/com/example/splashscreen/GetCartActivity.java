@@ -1,5 +1,6 @@
 package com.example.splashscreen;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +16,8 @@ import retrofit2.Response;
 public class GetCartActivity extends AppCompatActivity {
 
 
+    SharedPreferences sharedPreferences=getSharedPreferences("login",MODE_PRIVATE);
+    String token=sharedPreferences.getString("token","");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +25,7 @@ public class GetCartActivity extends AppCompatActivity {
         setContentView(R.layout.activity_get_cart);
 
 
-        App.getRetrofit().create(RetroInterface.class).getCart("1").enqueue(new Callback<List<Cart>>() {
+        App.getRetrofit().create(RetroInterface.class).getCart(token).enqueue(new Callback<List<Cart>>() {
             @Override
             public void onResponse(Call<List<Cart>> call, Response<List<Cart>> response) {
                 List<Cart> list=response.body();

@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.example.splashscreen.data.viewModel.CartDetailsViewModel;
 import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -66,17 +67,20 @@ public class SignIn extends AppCompatActivity {
     private Button login;
     private Button signup;
 
+//    SharedPreferences loginPreferences=getApplicationContext().getSharedPreferences("login",MODE_PRIVATE);
+//    SharedPreferences.Editor editor=loginPreferences.edit();
+//    CartDetailsViewModel cartDetailsViewModel;
 
-//    private static final Pattern PASSWORD_PATTERN =
-//            Pattern.compile("^" +
+    private static final Pattern PASSWORD_PATTERN =
+            Pattern.compile("^" +
 //                    "(?=.*[0-9])" +         //at least 1 digit
 //                    "(?=.*[a-z])" +         //at least 1 lower case letter
 //                    "(?=.*[A-Z])" +         //at least 1 upper case letter
-//                    "(?=.*[a-zA-Z])" +      //any letter
+                    "(?=.*[a-zA-Z])" +      //any letter
 //                    "(?=.*[@#$%^&+=])" +    //at least 1 special character
 //                    "(?=\\S+$)" +           //no white spaces
-//                    ".{4,}" +               //at least 4 characters
-//                    "$");
+                    ".{4,}" +               //at least 4 characters
+                    "$");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -137,6 +141,7 @@ public class SignIn extends AppCompatActivity {
                                 ResponseLogIn responseLogIn=response.body();
                                 if(responseLogIn.getStatus()==1000)
                                 {
+                                    Toast.makeText(SignIn.this,"facebook LOgin successful",Toast.LENGTH_LONG).show();
                                     Intent intent=new Intent(SignIn.this,MainActivity.class);
                                     startActivity(intent);
                                 }
@@ -312,6 +317,7 @@ public class SignIn extends AppCompatActivity {
                 public void onResponse(Call<ResponseLogIn> call, Response<ResponseLogIn> response) {
                     ResponseLogIn responseLogIn=response.body();
                     if(responseLogIn.getStatus()==1000) {
+                        Toast.makeText(SignIn.this,"google Sign in successful",Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(SignIn.this, MainActivity.class);
 //            intent.putExtra("token",idToken);
                         startActivity(intent);
@@ -348,15 +354,15 @@ public class SignIn extends AppCompatActivity {
     }
 
 
-    public void login(View v) {
-        if (!validateEmail()  ) {
-            return;
-        }
-
-        String input = "Email: " + userEmail.getText().toString();
-        input += "\n";
-        input += "Password: " + userPassword.getText().toString();
-
-        Toast.makeText(this, input, Toast.LENGTH_SHORT).show();
-    }
+//    public void login(View v) {
+//        if (!validateEmail()  ) {
+//            return;
+//        }
+//
+//        String input = "Email: " + userEmail.getText().toString();
+//        input += "\n";
+//        input += "Password: " + userPassword.getText().toString();
+//
+//        Toast.makeText(this, input, Toast.LENGTH_SHORT).show();
+//    }
 }

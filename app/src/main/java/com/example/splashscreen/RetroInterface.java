@@ -39,12 +39,11 @@ Call<List<Search>> getSearch(@Body SearchString searchString);
       @GET("/cartOrder/orderHistory/{userId}")
     Call<List<OrderHistory>> orderHistory(@Path("userId") String userId);
 
-
-      @POST("/login/getGoogleDetailsFromAndroid")
-    Call<ResponseLogIn> sendGoogleToken(@Body AccessToken accesstoken);
-
       @POST("/login/getFacebookDetails")
-    Call<ResponseLogIn>sendFacebookToken(@Body AccessToken accessToken);
+    Call<ResponseLogIn> sendFacebookToken(@Body AccessToken accessToken);
+
+      @POST("")
+    Call<ResponseLogIn>sendGoogleToken(@Body AccessToken accessToken);
 
 
 
