@@ -14,7 +14,15 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".SearchProductDetail"></activity>
-        <activity android:name=".Signup"></activity>
+        <activity android:name=".SignUp">
+
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".SignIn"></activity>
         <activity android:name=".GetCartActivity" />
         <activity android:name=".OrderHistoryActivity" />
@@ -26,16 +34,15 @@
         <activity android:name=".MyProfileActivity" />
         <activity android:name=".ProductActivity" />
         <activity android:name=".SearchActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" >
+
+        </activity>
+
     </application>
 
 </manifest>

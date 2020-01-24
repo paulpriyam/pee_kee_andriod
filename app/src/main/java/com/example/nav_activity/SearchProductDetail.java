@@ -40,7 +40,8 @@ public class SearchProductDetail extends AppCompatActivity implements Programmin
 
 
                     p=new Product();
-                     Log.d("MerchantId",search.getMerchantId());//  p.setMerchantId(search.getMerchantId());
+
+                    p.setMerchantId(search.getMerchantId());
                     p.setPrice(search.getPrice());
                     p.setProductCategoryId(search.getProductCategoryId());
                     p.setProductDesc(search.getProductDesc());

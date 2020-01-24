@@ -103,19 +103,20 @@
             android:orientation="horizontal"
             android:weightSum="2">
             <Button
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/productdetailaddtocart"
                 android:text="ADD TO CART"
                 android:layout_weight="1"
-                ></Button>
+                />
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/productdetailbuynow"
                 android:text="BUY NOW"
                 android:layout_weight="1"
-                ></Button>
+                />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

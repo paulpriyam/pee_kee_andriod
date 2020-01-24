@@ -25,17 +25,6 @@ public class AddToCartActivity extends AppCompatActivity {
 
 
 
-App.getRetrofit().create(RetroInterface.class).addToCart("a","a","q",1).enqueue(new Callback<Demo>() {
-    @Override
-    public void onResponse(Call<Demo> call, Response<Demo> response) {
-
-    }
-
-    @Override
-    public void onFailure(Call<Demo> call, Throwable t) {
-
-    }
-});
 
 
 

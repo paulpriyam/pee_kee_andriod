@@ -1,9 +1,12 @@
 package com.example.nav_activity;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,9 +16,21 @@ import java.util.List;
 public class ProductDetailAdaptor extends RecyclerView.Adapter<ProductDetailAdaptor.ProductViewHolder>{
 
     List<Merchant> merchants;
+    public  static int lastSelectedPosition = -1;
+    MerchantCommunication merchantCommunication;
 
-    public ProductDetailAdaptor(List<Merchant> merchants) {
+
+    public int getLastSelectedPosition(){
+        return lastSelectedPosition;
+    }
+
+
+    public ProductDetailAdaptor() {
+    }
+
+    public ProductDetailAdaptor(List<Merchant> merchants, MerchantCommunication merchantCommunication) {
         this.merchants = merchants;
+        this.merchantCommunication=merchantCommunication;
     }
 
     @NonNull
@@ -34,6 +49,12 @@ public class ProductDetailAdaptor extends RecyclerView.Adapter<ProductDetailAdap
         holder.merchant_price.setText(String.valueOf(merchants.get(position).getPrice()));
         holder.quantity.setText(String.valueOf(merchants.get(position).getQuantity()));
 
+        //since only one radio button is allowed to be selected,
+        // this condition un-checks previous selections
+
+        holder.selectionstate.setChecked(lastSelectedPosition == position);
+
+
     }
 
     @Override
@@ -47,14 +68,41 @@ public class ProductDetailAdaptor extends RecyclerView.Adapter<ProductDetailAdap
         TextView merchant_rating;
         TextView merchant_price;
         TextView quantity;
+       public RadioButton selectionstate;
+
+
+
+
         public ProductViewHolder(@NonNull View itemView) {
             super(itemView);
+
+
             merchant_name=(TextView) itemView.findViewById(R.id.merchantname);
             merchant_rating=(TextView)itemView.findViewById(R.id.merchantrating);
             merchant_price=(TextView)itemView.findViewById(R.id.merchant_price);
             quantity=(TextView)itemView.findViewById(R.id.merchantitemcount);
+            selectionstate = (RadioButton) itemView.findViewById(R.id.offer_select);
+
+            selectionstate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+
+                    lastSelectedPosition = getAdapterPosition();
+                    Log.d("position ", String.valueOf(lastSelectedPosition));
+                    notifyDataSetChanged();
+
+
+
+                }
+            });
 
         }
+    }
+
+    public interface MerchantCommunication{
+
+        public void onAddClick(Merchant position);
     }
 
 

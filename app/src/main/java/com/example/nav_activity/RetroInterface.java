@@ -18,12 +18,7 @@ public interface RetroInterface {
 
 
     @POST("/cartOrder/addToCart")
-    Call<Demo> addToCart(
-            @Field("userId") String userId,
-            @Field("productId")String productId,
-            @Field("merchantId")String merchant_id,
-            @Field("quantity") long quantity
-            );
+    Call<ResponseLogIn> addToCart(@Body AddCartDetails addCartDetails);
     @GET("/cartOrder/cart/{userId}")
     Call<List<Cart>>  getCart(@Path("userId")String userId);
 

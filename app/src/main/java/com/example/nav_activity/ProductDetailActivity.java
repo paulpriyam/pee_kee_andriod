@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
@@ -21,13 +23,15 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class ProductDetailActivity extends AppCompatActivity {
+public class ProductDetailActivity extends AppCompatActivity implements ProductDetailAdaptor.MerchantCommunication{
     TextView productName;
     TextView productDescription;
     Button addToCart;
     Button buyNow;
     ImageView productimage;
+    int productId=1;     //TODO:change it to dynamic
 
+    List<Merchant> merchants;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,11 +56,11 @@ public class ProductDetailActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResponseMerchant> call, Response<ResponseMerchant> response) {
                 ResponseMerchant responseMerchant=response.body();
-                List<Merchant> merchants=responseMerchant.getData();
+                merchants=responseMerchant.getData();
 
                 RecyclerView recyclerView=findViewById(R.id.productdetailrecyclerview);
                 recyclerView.setLayoutManager(new LinearLayoutManager(ProductDetailActivity.this));
-                recyclerView.setAdapter(new ProductDetailAdaptor(merchants));
+                recyclerView.setAdapter(new ProductDetailAdaptor(merchants,ProductDetailActivity.this));
 
             }
 
@@ -68,9 +72,52 @@ public class ProductDetailActivity extends AppCompatActivity {
         });
 
 
+        addToCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            Log.d("position:", String.valueOf(merchants.get(ProductDetailAdaptor.lastSelectedPosition)));
+
+          //  Toast.makeText(ProductDetailActivity.this,String.valueOf(ProductDetailAdaptor.lastSelectedPosition),Toast.LENGTH_LONG).show();
+
+                AddCartDetails addCartDetails=new AddCartDetails("eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySWQiOiJmaGQiLCJ1c2VyRW1haWwiOiJqeW90aGlwMDA5QGdtYWlsLmNvbSJ9.2ktkrE0pIjsO3ZA0_ZFRHWccq13-Zcf1C-8mGs1SVE4NJc8_t8Sz5HooL5uY3gaS85j5ivh7bCeRfhjCH3jvXg","1",merchants.get(ProductDetailAdaptor.lastSelectedPosition).getMerchantId().toString(),1);
+                App.getRetrofit().create(RetroInterface.class).addToCart(addCartDetails).enqueue(new Callback<ResponseLogIn>() {
+                    @Override
+                    public void onResponse(Call<ResponseLogIn> call, Response<ResponseLogIn> response) {
+
+                        Log.d("response","came");
+                        ResponseLogIn responseAddtoCart=response.body();
+                        System.out.println(response.body());
+                        if(responseAddtoCart.getStatus()==1000)
+                            Toast.makeText(ProductDetailActivity.this,"Added ToCart",Toast.LENGTH_LONG).show();
+                        else
+                            Toast.makeText(ProductDetailActivity.this,"Failure",Toast.LENGTH_LONG).show();
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseLogIn> call, Throwable t) {
+
+
+                    }
+                });
+
+
+
+
+
+            }
+        });
+
+
         }
 
 
 
 
+    @Override
+    public void onAddClick(Merchant position) {
+
+
+
+    }
 }
