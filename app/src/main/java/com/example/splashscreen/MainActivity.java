@@ -169,12 +169,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         if(id==R.id.nav_cart)
         {
-            Intent intent=new Intent(MainActivity.this,GetCartActivity.class);
+            Intent intent=new Intent(MainActivity.this,CartActivity.class);
             startActivity(intent);
         }
         if(id==R.id.nav_order)
         {
-            Intent intent=new Intent(MainActivity.this,GetCartActivity.class);
+            Intent intent=new Intent(MainActivity.this,OrderHistoryActivity.class);
             startActivity(intent);
         }
         if(id==R.id.nav_logout)

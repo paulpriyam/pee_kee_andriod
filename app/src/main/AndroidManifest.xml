@@ -16,7 +16,11 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".CartActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".AfterSignIn" />
         <activity android:name=".CategoryActivity" />
@@ -27,11 +31,7 @@
         </activity>
         <activity android:name=".SplashScreenActivity">
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".MyProfileActivity" />
         <activity android:name=".ProductActivity" />
