@@ -25,7 +25,7 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.CartC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.get_cart_layout);
+        setContentView(R.layout.activity_cart);
         ImageView add=findViewById(R.id.cart_layout_add);
         ImageView remove=findViewById(R.id.cart_layout_remove);
         ImageView delete=findViewById(R.id.cart_layout_delete);
