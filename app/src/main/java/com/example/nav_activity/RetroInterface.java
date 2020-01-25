@@ -27,6 +27,7 @@ public interface RetroInterface {
     @POST("/cartorderservice/cartOrder/addToCart")
     Call<ResponseLogIn> addToCart(@Body AddCartDetails addCartDetails);
     @GET("/cartorderservice/cartOrder/cart/{token}")
+
     Call<ResponseCart>  getCart(@Path("token")String token);
 
   @POST("/cartorderservice/cartOrder/updateQuantity")
@@ -34,11 +35,11 @@ public interface RetroInterface {
 
 
 
-  @POST("/loginservice/login/user")
+  @POST("/loginservice/user")
    Call<ResponseLogIn> login(@Body LoginPost loginPost);
 
 
-  @POST("/loginservice/login/saveCustomer")
+  @POST("/loginservice/saveCustomer")
   Call<ResponseLogIn> customerSignUp(@Body SignupDetails signupDetails);
 
 

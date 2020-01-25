@@ -15,6 +15,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.nav_activity.data.entity.CartDetails;
 
 import java.util.List;
@@ -50,6 +52,8 @@ String token;
 
         holder.merchantName.setText(String.valueOf(mCart.get(position).getMerchantName()));
         holder.productName.setText(String.valueOf(mCart.get(position).getProductName()));
+
+        Glide.with(holder.productImage.getContext()).applyDefaultRequestOptions(new RequestOptions().placeholder(R.drawable.ic_launcher_foreground)).load(mCart.get(position).getProductImage()).into(holder.productImage);
 
         holder.quantity.setText(String.valueOf(mCart.get(position).getQuantity()));
 
@@ -93,26 +97,59 @@ String token;
             @Override
             public void onClick(View v) {
 
-                AddCartDetails addCartDetails=new AddCartDetails();
-                addCartDetails.setQuantity(mCart.get(position).getQuantity()-1);
-                addCartDetails.setMerchantId(mCart.get(position).getMerchantId());
-                addCartDetails.setProductId(mCart.get(position).getProductId());
-                addCartDetails.setToken(token);
 
-                App.getRetrofit().create(RetroInterface.class).updateCartQuantity(addCartDetails).enqueue(new Callback<ResponseLogIn>() {
-                    @Override
-                    public void onResponse(Call<ResponseLogIn> call, Response<ResponseLogIn> response) {
+                long x=mCart.get(position).getQuantity()-1;
+                if(x==0)
+                {
+                    AddCartDetails addCartDetails=new AddCartDetails();
+                    addCartDetails.setQuantity(mCart.get(position).getQuantity());
+                    addCartDetails.setMerchantId(mCart.get(position).getMerchantId());
+                    addCartDetails.setProductId(mCart.get(position).getProductId());
+                    addCartDetails.setToken(token);
 
-                        ((Activity)context).finish();
-                        context.startActivity(new Intent(context, GetCartActivity.class));
+                    App.getRetrofit().create(RetroInterface.class).deleteCartData(addCartDetails).enqueue(new Callback<ResponseLogIn>() {
+                        @Override
+                        public void onResponse(Call<ResponseLogIn> call, Response<ResponseLogIn> response) {
 
-                    }
+                            ((Activity)context).finish();
+                            context.startActivity(new Intent(context, GetCartActivity.class));
 
-                    @Override
-                    public void onFailure(Call<ResponseLogIn> call, Throwable t) {
+                        }
 
-                    }
-                });
+                        @Override
+                        public void onFailure(Call<ResponseLogIn> call, Throwable t) {
+
+                        }
+                    });
+
+                }
+                else
+                {
+                    AddCartDetails addCartDetails=new AddCartDetails();
+                    addCartDetails.setQuantity(mCart.get(position).getQuantity()-1);
+                    addCartDetails.setMerchantId(mCart.get(position).getMerchantId());
+                    addCartDetails.setProductId(mCart.get(position).getProductId());
+                    addCartDetails.setToken(token);
+
+                    App.getRetrofit().create(RetroInterface.class).updateCartQuantity(addCartDetails).enqueue(new Callback<ResponseLogIn>() {
+                        @Override
+                        public void onResponse(Call<ResponseLogIn> call, Response<ResponseLogIn> response) {
+
+                            ((Activity)context).finish();
+                            context.startActivity(new Intent(context, GetCartActivity.class));
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseLogIn> call, Throwable t) {
+
+                        }
+                    });
+                }
+
+
+
+
 
             }
         });
@@ -169,7 +206,7 @@ String token;
             decrease=itemView.findViewById(R.id.decrease);
             price=itemView.findViewById(R.id.cart_layout_price);
             productImage=itemView.findViewById(R.id.cart_layout_image);
-       merchantName=itemView.findViewById(R.id.cart_layout_merchantName);
+            merchantName=itemView.findViewById(R.id.cart_layout_merchantName);
             productName=itemView.findViewById(R.id.cart_layout_name);
             quantity=itemView.findViewById(R.id.cart_layout_quantity);
 
