@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:155482903569:android:f517491fee057cd32ccdb0",
         "android_client_info": {
-          "package_name": "com.example.splashscreen"
+          "package_name": "com.example.nav_activity"
         }
       },
       "oauth_client": [

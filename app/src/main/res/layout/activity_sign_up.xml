@@ -23,13 +23,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/signupguide"
-        app:layout_constraintBottom_toBottomOf="parent">
     <EditText
         android:id="@+id/signupname"
         android:layout_width="match_parent"
@@ -43,7 +36,7 @@
         />
 
     <EditText
-        android:id="@+id/signuemail"
+        android:id="@+id/signupemail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
@@ -62,7 +55,7 @@
         android:inputType="phone"
         android:imeOptions="actionNext"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/signuemail" />
+        app:layout_constraintTop_toBottomOf="@id/signupemail" />
 
     <EditText
         android:id="@+id/signupaddress1"
@@ -121,5 +114,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/signuppasswordconf"></Button>
-    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

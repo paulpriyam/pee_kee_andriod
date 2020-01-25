@@ -43,21 +43,21 @@
                 app:layout_constraintTop_toBottomOf="@id/cart_layout_name"
                 android:layout_marginLeft="24dp"
                 ></TextView>
-<!--            <Spinner-->
-<!--                android:id="@+id/cart_layout_spinner"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:entries="values/strings.xml:20"-->
-<!--                app:layout_constraintStart_toEndOf="@id/cart_layout_image"-->
-<!--                app:layout_constraintTop_toBottomOf="@id/cart_layout_price"-->
-<!--                android:layout_marginLeft="24dp"></Spinner>-->
+            <Spinner
+                android:id="@+id/cart_layout_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                app:layout_constraintStart_toEndOf="@id/cart_layout_image"
+                app:layout_constraintTop_toBottomOf="@id/cart_layout_price"
+                android:layout_marginLeft="24dp"></Spinner>
             <Button
                 android:id="@+id/cart_layout_delete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="delete"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cart_layout_spinner"
                 ></Button>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

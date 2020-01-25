@@ -1,16 +1,12 @@
 <resources>
-    <string name="app_name">BarleyKart</string>
-    <string name="title_activity_main_screen">MainScreen</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
-    <string name="welcome">Barley Kart</string>
-    <string name="facebook_app_id">3060319450680031</string>
-    <string name="fb_login_protocol_scheme">fb3060319450680031</string>
-    <string name="Client_id">155482903569-be5obg9fn0ruj5can2aiptb3131fp256.apps.googleusercontent.com</string>
+    <string name="app_name">Barley Kart</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
 
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
@@ -20,5 +16,12 @@
     <string name="menu_send">Send</string>
     <string name="notofication">notofication</string>
     <string name="cart">cart</string>
+    <string name="Client_id">557158374256-tj050qrsp746hc1pk72igqae7apo0k07.apps.googleusercontent.com</string>
+    <string name="welcome">Barley Kart</string>
+    <string name="facebook_app_id">3060319450680031</string>
+    <string name="fb_login_protocol_scheme">fb3060319450680031</string>
+
+
+
 
 </resources>
