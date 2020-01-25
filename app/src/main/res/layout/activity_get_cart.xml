@@ -6,10 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".GetCartActivity">
 
+    <TextView
+        android:id="@+id/textView2"
+
+        android:layout_width="match_parent"
+
+        android:layout_height="20dp"
+        android:text="Ypu are in cart view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/get_cart_recycle"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="379dp"
+        android:layout_height="563dp"
         android:layout_margin="22dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"

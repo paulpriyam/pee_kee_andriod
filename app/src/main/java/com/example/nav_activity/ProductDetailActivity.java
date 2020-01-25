@@ -1,9 +1,13 @@
 package com.example.nav_activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,6 +18,8 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.nav_activity.data.entity.CartDetails;
+import com.example.nav_activity.data.viewModel.CartDetailsViewModel;
 
 import java.util.List;
 
@@ -23,15 +29,20 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class ProductDetailActivity extends AppCompatActivity implements ProductDetailAdaptor.MerchantCommunication{
+public class ProductDetailActivity extends AppCompatActivity implements ProductDetailAdaptor.MerchantCommunication {
     TextView productName;
     TextView productDescription;
     Button addToCart;
     Button buyNow;
     ImageView productimage;
-    int productId=1;     //TODO:change it to dynamic
+    SharedPreferences sharedPreferences;
+
+    CartDetailsViewModel cartDetailsViewModel;
+    String productId;
+    //TODO:change it to dynamic
 
     List<Merchant> merchants;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,57 +51,54 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
         productDescription = findViewById(R.id.productdetailslinearprod_des);
         addToCart = findViewById(R.id.productdetailaddtocart);
         buyNow = findViewById(R.id.productdetailbuynow);
-        productimage =findViewById(R.id.productdeatilpreview);
+        productimage = findViewById(R.id.productdeatilpreview);
 
 
-        String url=getIntent().getStringExtra("image");
+        productId = getIntent().getStringExtra("productId");
+
+        String url = getIntent().getStringExtra("image");
         Glide.with(this).applyDefaultRequestOptions(new RequestOptions().placeholder(R.drawable.ic_launcher_foreground)).load(url).into(productimage);
 
 
-       // productName.setText(getIntent().getStringExtra("name"));
-       // Glide.with(this).load(getIntent().getStringExtra("url")).into(productimage);
-    //    Glide.with(this).applyDefaultRequestOptions(new RequestOptions().placeholder(R.drawable.ic_launcher_foreground)).load(getIntent().getStringExtra("url")).into(productimage);
+        // productName.setText(getIntent().getStringExtra("name"));
+        // Glide.with(this).load(getIntent().getStringExtra("url")).into(productimage);
+        //    Glide.with(this).applyDefaultRequestOptions(new RequestOptions().placeholder(R.drawable.ic_launcher_foreground)).load(getIntent().getStringExtra("url")).into(productimage);
 
 
         App.getRetrofit().create(RetroInterface.class).getMerchentList("1").enqueue(new Callback<ResponseMerchant>() {
             @Override
             public void onResponse(Call<ResponseMerchant> call, Response<ResponseMerchant> response) {
-                ResponseMerchant responseMerchant=response.body();
-                merchants=responseMerchant.getData();
+                ResponseMerchant responseMerchant = response.body();
+                merchants = responseMerchant.getData();
 
-                RecyclerView recyclerView=findViewById(R.id.productdetailrecyclerview);
+                RecyclerView recyclerView = findViewById(R.id.productdetailrecyclerview);
                 recyclerView.setLayoutManager(new LinearLayoutManager(ProductDetailActivity.this));
-                recyclerView.setAdapter(new ProductDetailAdaptor(merchants,ProductDetailActivity.this));
+                recyclerView.setAdapter(new ProductDetailAdaptor(merchants, ProductDetailActivity.this));
 
             }
 
             @Override
             public void onFailure(Call<ResponseMerchant> call, Throwable t) {
 
-                Log.d("Fail","sorry , server did not connect");
+                Log.d("Fail", "sorry , server did not connect");
             }
         });
-
 
         addToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            Log.d("position:", String.valueOf(merchants.get(ProductDetailAdaptor.lastSelectedPosition)));
-
-          //  Toast.makeText(ProductDetailActivity.this,String.valueOf(ProductDetailAdaptor.lastSelectedPosition),Toast.LENGTH_LONG).show();
-
-                AddCartDetails addCartDetails=new AddCartDetails("eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySWQiOiJmaGQiLCJ1c2VyRW1haWwiOiJqeW90aGlwMDA5QGdtYWlsLmNvbSJ9.2ktkrE0pIjsO3ZA0_ZFRHWccq13-Zcf1C-8mGs1SVE4NJc8_t8Sz5HooL5uY3gaS85j5ivh7bCeRfhjCH3jvXg","1",merchants.get(ProductDetailAdaptor.lastSelectedPosition).getMerchantId().toString(),1);
+                AddCartDetails addCartDetails = new AddCartDetails("eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySWQiOiI1ZjNjMTJkNS1iMTAzLTQ1YTctYjBhMS1hZTIwZGVmYzFlZWIiLCJyb2xlIjoidXNlciJ9.CMu2xsWQETSgNFr9I-zD7nA7Gmf21nx1Iah3PRt695ONnx5tB78SjI-c0e15Cn4-PVF__vXuyEcnXo89hGV6gw", "1", merchants.get(ProductDetailAdaptor.lastSelectedPosition).getMerchantId().toString(), 1);
                 App.getRetrofit().create(RetroInterface.class).addToCart(addCartDetails).enqueue(new Callback<ResponseLogIn>() {
                     @Override
                     public void onResponse(Call<ResponseLogIn> call, Response<ResponseLogIn> response) {
 
-                        Log.d("response","came");
-                        ResponseLogIn responseAddtoCart=response.body();
+                        Log.d("response", "came");
+                        ResponseLogIn responseAddtoCart = response.body();
                         System.out.println(response.body());
-                        if(responseAddtoCart.getStatus()==1000)
-                            Toast.makeText(ProductDetailActivity.this,"Added ToCart",Toast.LENGTH_LONG).show();
+                        if (responseAddtoCart.getStatus() == 1000)
+                            Toast.makeText(ProductDetailActivity.this, "Added ToCart", Toast.LENGTH_LONG).show();
                         else
-                            Toast.makeText(ProductDetailActivity.this,"Failure",Toast.LENGTH_LONG).show();
+                            Toast.makeText(ProductDetailActivity.this, "Failure", Toast.LENGTH_LONG).show();
 
                     }
 
@@ -101,23 +109,19 @@ public class ProductDetailActivity extends AppCompatActivity implements ProductD
                     }
                 });
 
-
-
-
-
             }
+
+
         });
 
-
-        }
-
-
-
+    }
 
     @Override
     public void onAddClick(Merchant position) {
 
-
-
     }
 }
+
+
+
+

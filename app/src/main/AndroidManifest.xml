@@ -13,21 +13,26 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".SearchProductDetail"></activity>
+        <activity android:name=".SearchProductDetail">
+
+
+        </activity>
         <activity android:name=".SignUp">
 
 
+
+        </activity>
+        <activity android:name=".SignIn"></activity>
+        <activity android:name=".GetCartActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SignIn"></activity>
-        <activity android:name=".GetCartActivity" />
         <activity android:name=".OrderHistoryActivity" />
-        <activity android:name=".AddToCartActivity" />
         <activity android:name=".ProductDetailActivity">
+
 
         </activity>
         <activity android:name=".RetrofitActivity"></activity>
